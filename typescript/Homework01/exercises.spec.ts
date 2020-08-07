@@ -41,3 +41,17 @@ describe('Exercise 4', () => {
 		expect(validate(4012888888881882)).toBe(false)
 	})
 })
+
+describe('Exercise 5', () => {
+	it('hanoi', () => {
+		expect(hanoi(-1)('a')('b')('c').length).toBe(0)
+		expect(hanoi(0)('a')('b')('c').length).toBe(0)
+		expect(hanoi(1)('a')('b')('c').length).toBe(1)
+		expect(hanoi(2)('a')('b')('c').length).toBe(3)
+		expect(hanoi(3)('a')('b')('c').length).toBe(7)
+		expect(hanoi(4)('a')('b')('c').length).toBe(15)
+		expect(hanoi(5)('a')('b')('c').length).toBe(31)
+		expect(hanoi(15)('a')('b')('c').length).toBe(32767)
+	})
+})
+

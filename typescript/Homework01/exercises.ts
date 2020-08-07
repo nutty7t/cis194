@@ -54,3 +54,28 @@ const endsWithZero = (x: number) => x % 10 === 0
 
 // validate :: Number -> Boolean
 export const validate = flow(toDigits, doubleEveryOther, sumDigits, endsWithZero)
+
+//
+// Exercise 5
+//
+
+type Peg = String
+type Move = [Peg, Peg]
+
+// hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+export const hanoi = (n: number) => (a: Peg) => (b: Peg) => (c: Peg): Move[] => {
+	if (n <= 0) {
+		// nothing to do
+		return []
+	} else {
+		return A.flatten([
+			// move n - 1 discs from a to c using b
+			hanoi(n - 1)(a)(c)(b),
+			// move a to b
+			A.of([a, b]),
+			// move n - 1 discs from c to b using a
+			hanoi(n - 1)(c)(b)(a),
+		])
+	}
+}
+
