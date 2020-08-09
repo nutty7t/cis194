@@ -1,4 +1,12 @@
-import { toDigits, toDigitsRev, doubleEveryOther, sumDigits, validate } from "./exercises"
+import {
+	toDigits,
+	toDigitsRev,
+	doubleEveryOther,
+	sumDigits,
+	validate,
+	hanoi,
+	hanoi4,
+} from './exercises'
 
 describe('Exercise 1', () => {
 	it('toDigits', () => {
@@ -55,3 +63,9 @@ describe('Exercise 5', () => {
 	})
 })
 
+describe('Exercise 6', () => {
+	it('hanoi4', () => {
+		expect(hanoi4(5)('a')('b')('c')('d').length).toBe(13)
+		expect(hanoi4(15)('a')('b')('c')('d').length).toBe(129)
+	})
+})

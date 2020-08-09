@@ -79,3 +79,27 @@ export const hanoi = (n: number) => (a: Peg) => (b: Peg) => (c: Peg): Move[] => 
 	}
 }
 
+//
+// Exercise 6
+//
+
+// hanoi4 :: Integer -> Peg -> Peg -> Peg -> Peg -> [Move]
+export const hanoi4 = (n: number) => (a: Peg) => (b: Peg) => (c: Peg) => (d: Peg): Move[] => {
+	if (n <= 0) {
+		// nothing to do
+		return []
+	} else if (n === 1) {
+		return A.of([a, b])
+	} else {
+		return A.flatten([
+			// move n - 2 discs from a to c using b and d
+			hanoi4(n - 2)(a)(c)(b)(d),
+			// move bottom two disks from a to b
+			A.of([a, d]),
+			A.of([a, b]),
+			A.of([d, b]),
+			// move n - 2 discs from c to b using a and d
+			hanoi4(n - 2)(c)(b)(a)(d),
+		])
+	}
+}
