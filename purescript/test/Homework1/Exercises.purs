@@ -2,6 +2,8 @@ module Test.Homework1.Exercises where
 
 import Prelude
 
+import Data.Array (length)
+
 import Homework1.Exercises as E
 
 import Test.Spec (Spec, describe, it)
@@ -53,3 +55,26 @@ homework1Spec =
       it "validate'" do
         E.validate' "4012888888881881" `shouldEqual` true
         E.validate' "4012888888881882" `shouldEqual` false
+
+    describe "Exercise 5" do
+      it "hanoi" do
+        let a = "a"
+        let b = "b"
+        let c = "c"
+        length (E.hanoi (-1) a b c) `shouldEqual` 0
+        length (E.hanoi 0 a b c) `shouldEqual` 0
+        length (E.hanoi 1 a b c) `shouldEqual` 1
+        length (E.hanoi 2 a b c) `shouldEqual` 3
+        length (E.hanoi 3 a b c) `shouldEqual` 7
+        length (E.hanoi 4 a b c) `shouldEqual` 15
+        length (E.hanoi 5 a b c) `shouldEqual` 31
+        length (E.hanoi 15 a b c) `shouldEqual` 32767
+
+    describe "Exercise 6" do
+      it "hanoi4" do
+        let a = "a"
+        let b = "b"
+        let c = "c"
+        let d = "d"
+        length (E.hanoi4 5 a b c d) `shouldEqual` 13
+        length (E.hanoi4 15 a b c d) `shouldEqual` 129

@@ -10,6 +10,7 @@ import Data.Foldable (foldMap, sum)
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Conj (Conj(..))
 import Data.Newtype (unwrap)
+import Data.Tuple (Tuple(..))
 
 --
 -- Exercise 1
@@ -85,3 +86,33 @@ validate = endsWithZero <<< sumDigits <<< doubleEveryOther <<< toDigits
 
 validate' :: String -> Boolean
 validate' = endsWithZero <<< sumDigits <<< doubleEveryOther <<< toDigits'
+
+--
+-- Exercise 5
+--
+
+type Peg = String
+type Move = Tuple Peg Peg
+
+hanoi :: Int -> Peg -> Peg -> Peg -> Array Move
+hanoi n a b c
+  | n <= 0 = []
+  | otherwise =
+      (hanoi (n - 1) a c b) <>
+      [Tuple a b] <>
+      (hanoi (n - 1) c b a)
+
+--
+-- Exercise 6
+--
+
+hanoi4 :: Int -> Peg -> Peg -> Peg -> Peg -> Array Move 
+hanoi4 n a b c d
+  | n <= 0 = []
+  | n == 1 = [Tuple a b]
+  | otherwise =
+      (hanoi4 (n - 2) a c b d) <>
+      [Tuple a d] <>
+      [Tuple a b] <>
+      [Tuple d b] <>
+      (hanoi4 (n - 2) c b a d)
