@@ -2,11 +2,11 @@ module Homework1.Exercises where
 
 import Prelude
 
-import Data.Array (filter, mapWithIndex, reverse)
+import Data.Array (mapWithIndex, reverse)
 import Data.Traversable (traverse)
 import Data.String.Utils (toCharArray)
 import Data.Int (fromString)
-import Data.Foldable (all, foldMap, sum)
+import Data.Foldable (foldMap, sum)
 import Data.Maybe (Maybe(..))
 import Data.Monoid.Conj (Conj(..))
 import Data.Newtype (unwrap)
