@@ -17,7 +17,7 @@ homework1Spec =
         E.toDigits 0 `shouldEqual` []
         E.toDigits (-1) `shouldEqual` []
         E.toDigits 12345 `shouldEqual` [1, 2, 3, 4, 5]
-    
+
       it "toDigitsRev" do
         E.toDigitsRev 0 `shouldEqual` []
         E.toDigitsRev (-1) `shouldEqual` []
@@ -28,7 +28,7 @@ homework1Spec =
         E.toDigits' "00000000" `shouldEqual` []
         E.toDigits' "-1" `shouldEqual` []
         E.toDigits' "12345" `shouldEqual` [1, 2, 3, 4, 5]
-    
+
       it "toDigitsRev'" do
         E.toDigitsRev' "0" `shouldEqual` []
         E.toDigitsRev' "-1" `shouldEqual` []
