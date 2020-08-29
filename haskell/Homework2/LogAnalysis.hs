@@ -20,10 +20,10 @@ parseInt :: String -> (String, Maybe Int)
 parseInt m =
   let
     tokens = words m
-    severity = readMaybe =<< headMay tokens
+    value = readMaybe =<< headMay tokens
   in
-    case severity of
-      Just s  -> (consume 1 tokens, Just s)
+    case value of
+      Just i  -> (consume 1 tokens, Just i)
       Nothing -> (consume 0 tokens, Nothing)
 
 parseMessageType :: String -> (String, Maybe MessageType)
@@ -47,4 +47,11 @@ parseMessage m =
                                 (m'', Just timestamp) -> LogMessage messageType timestamp m''
                                 (m'', Nothing)        -> Unknown m''
     (m', Nothing)          -> Unknown m'
+
+parse :: String -> [LogMessage]
+parse = parse' . lines
+  where
+    parse' :: [String] -> [LogMessage]
+    parse' [] = []
+    parse' (l:ls) = parseMessage l : parse' ls
 
