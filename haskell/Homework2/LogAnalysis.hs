@@ -55,3 +55,17 @@ parse = parse' . lines
     parse' [] = []
     parse' (l:ls) = parseMessage l : parse' ls
 
+--
+-- Exercise 2
+--
+
+insert :: LogMessage -> MessageTree -> MessageTree
+insert (Unknown _)           t                      = t
+insert m@(LogMessage _ _  _) Leaf                   = Node Leaf m Leaf
+insert m@(LogMessage _ ts _) t@(Node left m' right) =
+  case m' of
+    Unknown _            -> t
+    (LogMessage _ ts' _) -> if ts <= ts'
+                               then (Node (insert m left) m' right)
+                               else (Node left m' (insert m right))
+
