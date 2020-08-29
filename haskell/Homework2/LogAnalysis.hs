@@ -80,3 +80,11 @@ build messages = build' messages Leaf
     build' []     t = t
     build' (m:ms) t = build' ms (insert m t)
 
+--
+-- Exercise 4
+--
+
+inOrder :: MessageTree -> [LogMessage]
+inOrder Leaf         = []
+inOrder (Node l m r) = inOrder l ++ [m] ++ inOrder r
+
