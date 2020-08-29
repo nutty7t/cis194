@@ -69,3 +69,14 @@ insert m@(LogMessage _ ts _) t@(Node left m' right) =
                                then (Node (insert m left) m' right)
                                else (Node left m' (insert m right))
 
+--
+-- Exercise 3
+--
+
+build :: [LogMessage] -> MessageTree
+build messages = build' messages Leaf
+  where
+    build' :: [LogMessage] -> MessageTree -> MessageTree
+    build' []     t = t
+    build' (m:ms) t = build' ms (insert m t)
+
