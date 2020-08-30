@@ -66,8 +66,8 @@ insert m@(LogMessage _ ts _) t@(Node left m' right) =
   case m' of
     Unknown _            -> t
     (LogMessage _ ts' _) -> if ts <= ts'
-                               then (Node (insert m left) m' right)
-                               else (Node left m' (insert m right))
+                              then (Node (insert m left) m' right)
+                              else (Node left m' (insert m right))
 
 --
 -- Exercise 3
@@ -87,4 +87,28 @@ build messages = build' messages Leaf
 inOrder :: MessageTree -> [LogMessage]
 inOrder Leaf         = []
 inOrder (Node l m r) = inOrder l ++ [m] ++ inOrder r
+
+--
+-- Exercise 5
+--
+
+sortMessages :: [LogMessage] -> [LogMessage]
+sortMessages = inOrder . build
+
+getMessage :: LogMessage -> String
+getMessage (Unknown m)        = m
+getMessage (LogMessage _ _ m) = m
+
+whatWentWrong :: [LogMessage] -> [String]
+whatWentWrong = fmap getMessage . sortMessages . filter isSevere
+  where
+    isSevere :: LogMessage -> Bool
+    isSevere (LogMessage (Error s) _ _) = s >= 50
+    isSevere _                          = False
+
+--
+-- Exercise 6
+--
+
+-- Yann-Joachim Ringard (Jean-Yves Girard)
 
