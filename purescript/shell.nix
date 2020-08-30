@@ -10,5 +10,5 @@ let
 
 in
   pkgs.mkShell {
-    buildInputs = easyPS.buildInputs ++ [];
+    buildInputs = easyPS.buildInputs ++ [ pkgs.nodejs ];
   }
