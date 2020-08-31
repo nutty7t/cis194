@@ -5,9 +5,13 @@ import Control.Monad.State (State, get, modify, put, runState)
 import Data.Array (drop, head, intercalate)
 import Data.Int (fromString)
 import Data.Maybe (Maybe(..))
-import Data.String.Utils (words)
+import Data.String.Utils (lines, words)
 import Data.Tuple (Tuple(..))
 import Homework2.Log (LogMessage(..), MessageType(..))
+
+--
+-- Exercise 1
+--
 
 type Tokens
   = Array String
@@ -56,3 +60,6 @@ parseMessage m = case runState parseMessageType $ lex m of
     Tuple (Just ts) s' -> LogMessage mt ts $ unlex s'
     Tuple Nothing s' -> Unknown $ unlex s'
   Tuple Nothing s -> Unknown $ unlex s
+
+parse :: String -> Array LogMessage
+parse = map parseMessage <<< lines
