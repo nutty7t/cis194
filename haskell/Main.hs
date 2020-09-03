@@ -2,13 +2,13 @@ module Main where
 
 import Test.Hspec
 
-import Homework1.Spec
-import Homework2.Spec
+import Homework01.Spec
+import Homework02.Spec
 
 testSuite :: Spec
 testSuite = do
-  homework1Spec
-  homework2Spec
+  homework01Spec
+  homework02Spec
 
 main :: IO ()
 main = hspec testSuite

@@ -1,11 +1,11 @@
-module Homework1.Spec where
+module Homework01.Spec where
 
 import Test.Hspec
 
-import Homework1.Exercises as E
+import Homework01.Exercises as E
 
-homework1Spec :: Spec
-homework1Spec = do
+homework01Spec :: Spec
+homework01Spec = do
   describe "Homework1" $ do
     describe "Exercise 1" $ do
       it "toDigits" $ do

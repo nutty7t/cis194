@@ -1,4 +1,4 @@
-module Homework1.Exercises where
+module Homework01.Exercises where
 
 import Prelude
 

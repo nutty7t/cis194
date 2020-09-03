@@ -1,16 +1,16 @@
 {-# LANGUAGE QuasiQuotes #-}
 
-module Homework2.Spec where
+module Homework02.Spec where
 
 import Data.String.QQ
 
 import Test.Hspec
 
-import Homework2.LogAnalysis
-import Homework2.Log
+import Homework02.LogAnalysis
+import Homework02.Log
 
-homework2Spec :: Spec
-homework2Spec = do
+homework02Spec :: Spec
+homework02Spec = do
   describe "Homework2" $ do
     describe "Exercise 1" $ do
       it "parseMessage" $ do

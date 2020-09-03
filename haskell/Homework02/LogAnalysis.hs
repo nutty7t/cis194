@@ -1,13 +1,13 @@
 {-# OPTIONS_GHC -Wall #-}
 
-module Homework2.LogAnalysis where
+module Homework02.LogAnalysis where
 
 import Prelude
 
 import Safe
 import Text.Read
 
-import Homework2.Log
+import Homework02.Log
 
 --
 -- Exercise 1
