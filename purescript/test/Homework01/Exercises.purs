@@ -1,16 +1,16 @@
-module Test.Homework1.Exercises where
+module Test.Homework01.Exercises where
 
 import Prelude
 
 import Data.Array (length)
 
-import Homework1.Exercises as E
+import Homework01.Exercises as E
 
 import Test.Spec (Spec, describe, it)
 import Test.Spec.Assertions (shouldEqual)
 
-homework1Spec :: Spec Unit
-homework1Spec =
+homework01Spec :: Spec Unit
+homework01Spec =
   describe "Homework 1" do
     describe "Exercise 1" do
       it "toDigits" do

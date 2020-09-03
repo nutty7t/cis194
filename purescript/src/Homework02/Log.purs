@@ -1,4 +1,4 @@
-module Homework2.Log where
+module Homework02.Log where
 
 import Prelude
 import Data.Array (take)

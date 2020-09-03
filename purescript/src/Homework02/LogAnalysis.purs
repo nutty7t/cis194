@@ -1,4 +1,4 @@
-module Homework2.LogAnalysis where
+module Homework02.LogAnalysis where
 
 import Prelude
 import Control.Monad.State (State, get, modify, put, runState)
@@ -7,7 +7,7 @@ import Data.Int (fromString)
 import Data.Maybe (Maybe(..))
 import Data.String.Utils (lines, words)
 import Data.Tuple (Tuple(..))
-import Homework2.Log (LogMessage(..), MessageTree(..), MessageType(..))
+import Homework02.Log (LogMessage(..), MessageTree(..), MessageType(..))
 
 --
 -- Exercise 1

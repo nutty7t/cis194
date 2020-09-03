@@ -1,4 +1,4 @@
-module Homework1.Exercises where
+module Homework01.Exercises where
 
 import Prelude
 
@@ -106,7 +106,7 @@ hanoi n a b c
 -- Exercise 6
 --
 
-hanoi4 :: Int -> Peg -> Peg -> Peg -> Peg -> Array Move 
+hanoi4 :: Int -> Peg -> Peg -> Peg -> Peg -> Array Move
 hanoi4 n a b c d
   | n <= 0 = []
   | n == 1 = [Tuple a b]

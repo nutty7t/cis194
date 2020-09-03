@@ -1,14 +1,14 @@
-module Test.Homework2.Exercises where
+module Test.Homework02.Exercises where
 
 import Prelude
 import Data.Foldable (intercalate)
-import Homework2.Log (LogMessage(..), MessageTree(..), MessageType(..))
-import Homework2.LogAnalysis (build, inOrder, insert, parse, parseMessage, whatWentWrong)
+import Homework02.Log (LogMessage(..), MessageTree(..), MessageType(..))
+import Homework02.LogAnalysis (build, inOrder, insert, parse, parseMessage, whatWentWrong)
 import Test.Spec (Spec, describe, it)
 import Test.Spec.Assertions (shouldEqual)
 
-homework2Spec :: Spec Unit
-homework2Spec =
+homework02Spec :: Spec Unit
+homework02Spec =
   describe "Homework 2" do
     describe "Exercise 1" do
       it "parseMessage" do
