@@ -11,7 +11,9 @@ import {
 	LogMessage,
 	logMessage,
 	unknown,
-	testParse,
+	MessageTree,
+	node,
+	leaf,
 } from './Log'
 
 //
@@ -66,7 +68,7 @@ const parseMessageType = (tokens: string[]): [string[], O.Option<MessageType>] =
 	)
 
 // parseMessage :: [String] -> LogMessage
-const parseMessage = (tokens: string[]): LogMessage =>
+export const parseMessage = (tokens: string[]): LogMessage =>
 	pipe(parseMessageType(tokens), ([tokens2, maybeMessageType]) =>
 		pipe(
 			maybeMessageType,
@@ -100,12 +102,23 @@ const _parse = (lines: string[]) => {
 }
 
 // parse :: String -> [LogMessage]
-const parse = (s: string) => pipe(s.split('\n'), _parse)
+export const parse = (s: string) => pipe(s.split('\n'), _parse)
 
-console.log(
-	JSON.stringify(
-		testParse(parse)(99)('/home/nutty/Code/cis194/typescript/Homework02/sample.log')(),
-		null,
-		2
-	)
-)
+//
+// Exercise 2
+//
+
+// insert :: LogMessage -> MessageTree -> MessageTree
+export const insert = (m: LogMessage) => (t: MessageTree): MessageTree => {
+	if (t._tag === 'Leaf') {
+		return node(leaf())(m)(leaf())
+	}
+
+	if (t.value._tag === 'LogMessage' && m._tag === 'LogMessage') {
+		return m.timestamp <= t.value.timestamp
+			? node(insert(m)(t.left))(t.value)(t.right)
+			: node(t.left)(t.value)(insert(m)(t.left))
+	}
+
+	return t
+}
