@@ -1,4 +1,4 @@
-import { pipe } from 'fp-ts/lib/function'
+import { flow, pipe } from 'fp-ts/lib/function'
 import * as A from 'fp-ts/lib/Array'
 import * as NEA from 'fp-ts/lib/NonEmptyArray'
 import * as O from 'fp-ts/lib/Option'
@@ -117,8 +117,62 @@ export const insert = (m: LogMessage) => (t: MessageTree): MessageTree => {
 	if (t.value._tag === 'LogMessage' && m._tag === 'LogMessage') {
 		return m.timestamp <= t.value.timestamp
 			? node(insert(m)(t.left))(t.value)(t.right)
-			: node(t.left)(t.value)(insert(m)(t.left))
+			: node(t.left)(t.value)(insert(m)(t.right))
 	}
 
 	return t
 }
+
+//
+// Exercise 3
+//
+
+// _build :: [LogMessage] -> MessageTree -> MessageTree
+const _build = (ms: Array<LogMessage>) => (t: MessageTree): MessageTree => {
+	if (ms.length === 0) {
+		return t
+	} else {
+		const messages = ms as NEA.NonEmptyArray<LogMessage>
+		const head = NEA.head(messages)
+		const tail = NEA.tail(messages)
+		return _build(tail)(insert(head)(t))
+	}
+}
+
+// build :: [LogMessage] -> MessageTree
+export const build = (ms: Array<LogMessage>): MessageTree => _build(ms)(leaf())
+
+//
+// Exercise 4
+//
+
+// inOrder :: MessageTree -> [LogMessage]
+export const inOrder = (t: MessageTree): Array<LogMessage> => {
+	if (t._tag === 'Leaf') {
+		return []
+	} else {
+		return [inOrder(t.left), t.value, inOrder(t.right)].flat()
+	}
+}
+
+//
+// Exercise 5
+//
+
+// sortMessages :: [LogMessage] -> [LogMessage]
+const sortMessages = flow(build, inOrder)
+
+// getMessage :: LogMessage -> String
+const getMessage = (m: LogMessage) => m.message
+
+// isSevere :: LogMessage -> Bool
+const isSevere = (m: LogMessage) => {
+	if (m._tag === 'LogMessage' && m.type._tag === 'Error') {
+		return m.type.severity >= 50
+	} else {
+		return false
+	}
+}
+
+// whatWentWrong :: [LogMessage] -> [String]
+export const whatWentWrong = flow(A.filter(isSevere), sortMessages, A.map(getMessage))
