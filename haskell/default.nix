@@ -8,7 +8,12 @@ let
     inherit (nixpkgs) rev sha256;
   };
 
-  pinnedNixpkgs = import src {};
+  pinned = import src {};
+  app = pinned.haskellPackages.callPackage ./cis194.nix {};
+  lib = pinned.haskell.lib;
 
 in
-  pinnedNixpkgs.haskellPackages.callPackage ./cis194.nix {}
+  # I copied this from https://stackoverflow.com/a/54280625.
+  # I want to make a `shell.nix` file that combines the haskell build
+  # environment with some development tools.
+  lib.overrideCabal app (old: { buildTools = [ pinned.cabal-install pinned.cabal2nix ] ++ (old.buildTools or []); })
