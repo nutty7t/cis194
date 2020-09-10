@@ -110,17 +110,15 @@ export const parse = (s: string) => pipe(s.split('\n'), _parse)
 
 // insert :: LogMessage -> MessageTree -> MessageTree
 export const insert = (m: LogMessage) => (t: MessageTree): MessageTree => {
-	if (t._tag === 'Leaf') {
+	if (m._tag === 'Unknown') {
+		return t
+	} else if (t._tag === 'Leaf') {
 		return node(leaf())(m)(leaf())
-	}
-
-	if (t.value._tag === 'LogMessage' && m._tag === 'LogMessage') {
+	} else if (t.value._tag === 'LogMessage' && m._tag === 'LogMessage') {
 		return m.timestamp <= t.value.timestamp
 			? node(insert(m)(t.left))(t.value)(t.right)
 			: node(t.left)(t.value)(insert(m)(t.right))
 	}
-
-	return t
 }
 
 //
