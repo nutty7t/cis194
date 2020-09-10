@@ -1,6 +1,6 @@
 module Homework03.Golf where
 
-import Data.List (replicate)
+import Data.List (replicate, tails, transpose)
 
 --
 -- Exercise 1
@@ -18,3 +18,19 @@ skips as = unenum . fmap nth . enum . replicate (length as) $ as
     enum = zip [1 ..] . fmap (zip [1 ..])
     nth (i, xs) = (i, filter (\(j, x) -> j `mod` i == 0) xs)
     unenum = (fmap . fmap) snd . fmap snd
+
+--
+-- Exercise 2
+--
+
+windows :: Int -> [a] -> [[a]]
+windows n = transpose . take n . tails
+
+localMaxima :: [Integer] -> [Integer]
+localMaxima xs = windows 3 xs >>= filterPeak
+  where
+    filterPeak ws@([_, b, _]) =
+      if maximum ws == b
+        then [b]
+        else []
+    filterPeak ws = []
