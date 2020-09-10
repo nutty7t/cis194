@@ -1,0 +1,1 @@
+purescript/shell.nix
