@@ -34,3 +34,28 @@ localMaxima xs = windows 3 xs >>= filterPeak
         then [b]
         else []
     filterPeak ws = []
+
+--
+-- Exercise 3
+--
+
+count :: Eq a => [a] -> a -> Int
+count xs x = length . filter (x ==) $ xs
+
+bar :: Int -> Int -> String
+bar n w = mconcat $ replicate n "*" <> replicate (w - n) " "
+
+row :: Int -> Int -> Int -> String
+row i n w = show i <> "=" <> bar n w
+
+rows :: [Int] -> Int -> [String]
+rows cs m = uncurry row <$> zip [0 .. 9] cs <*> pure m
+
+rotate :: [[a]] -> [[a]]
+rotate = transpose . fmap reverse
+
+histogram :: [Integer] -> String
+histogram xs = unlines $ rotate $ rows cs m
+  where
+    cs = count xs <$> [0 .. 9]
+    m = maximum cs
